@@ -1,0 +1,14 @@
+<div>
+  <form>
+    <label for="name">Hero name: {{ hero.name }}</label>
+    <br>
+    <input id="name" #test=ngModel [(ngModel)]="hero.name"
+           [ngModelOptions]="{ name: 'test', standalone: true, updateOn: 'submit' }"
+           placeholder="name" required>
+    <br>
+  </form>
+
+  <small>{{ test.status }}</small>
+
+  <button type="submit">hey</button>
+</div>
