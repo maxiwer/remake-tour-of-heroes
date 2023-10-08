@@ -1,24 +1,32 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { Hero } from '../interfaces/hero';
 import {FormBuilder, FormControl} from "@angular/forms";
-import {HEROES} from "../mock/heroes.mock";
+import {HeroService} from "../services/hero.service";
+import {MessageService} from "../services/message.service";
 
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.css']
 })
-export class HeroesComponent {
+export class HeroesComponent implements OnInit{
   private fb = inject(FormBuilder);
+  private heroService = inject(HeroService);
+  private messageService = inject(MessageService);
 
-  heroes = HEROES;
-  selectedHero?: Hero;
+  heroes: Hero[] = [];
+  selectedHero!: Hero;
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
+    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
   }
 
-  hero: Hero = {
-    id: 1,
-    name: 'Windstorm'
-  };
+  getHeroes(): void {
+    this.heroService.getHeroes()
+      .subscribe(heroes => this.heroes = heroes);
+  }
+
+  ngOnInit(): void {
+    this.getHeroes();
+  }
 }

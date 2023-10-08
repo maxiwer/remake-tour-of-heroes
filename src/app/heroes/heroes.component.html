@@ -8,14 +8,4 @@
   </li>
 </ul>
 
-<div *ngIf="selectedHero">
-  <h2>{{selectedHero.name | uppercase}} Details</h2>
-  <div>id: {{selectedHero.id}}</div>
-  <div>
-    <label for="name">Hero name: {{ selectedHero.name }}</label>
-    <br>
-    <input id="name" #test=ngModel [(ngModel)]="selectedHero.name"
-           [ngModelOptions]="{ updateOn: 'blur' }"
-           placeholder="name" required>
-  </div>
-</div>
+<app-hero-detail [hero]="selectedHero"></app-hero-detail>

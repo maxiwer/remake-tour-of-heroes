@@ -1,0 +1,7 @@
+<button type="button" class="clear"
+        (click)="messageService.clear()">Clear messages
+</button>
+
+<small *ngFor="let m of messageService.messages">
+  {{ m }}
+</small>
